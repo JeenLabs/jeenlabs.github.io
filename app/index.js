@@ -2,7 +2,7 @@
 import React from 'react'
 import Head from 'next/head'
 
-const Home = (props) => {
+const Home = () => {
   return (
     <>
       <div className="home-container1">

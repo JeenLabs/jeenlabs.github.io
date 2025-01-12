@@ -102,11 +102,11 @@ const Home = () => {
             display: flex;
             overflow: hidden;
             align-items: center;
-            padding-top: 10%;
-            padding-left: 15%;
-            padding-right: 15%;
+            padding-top: 8%;
+            padding-left: 8%;
+            padding-right: 8%;
             flex-direction: column;
-            padding-bottom: 10%;
+            padding-bottom: 8%;
             background-color: var(--dl-color-theme-neutral-dark);
           }
           .home-hero-container {

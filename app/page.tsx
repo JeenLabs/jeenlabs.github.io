@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "@/components/navbar/navbar";
+import Hero from "@/pages/hero/hero";
 
 const Index = () => {
   const leftNavLinks = [
@@ -23,7 +24,7 @@ const Index = () => {
         logoHeight={0}
         buttonText="Coming Soon"
       />
-      HomePage
+      <Hero />
     </div>
   );
 };

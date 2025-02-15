@@ -1,7 +1,9 @@
 "use client";
-import React, { useState } from "react";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import clsx from "clsx";
 
 interface NavLink {
   name: string;
@@ -27,11 +29,40 @@ const Navbar: React.FC<NavbarProps> = ({
   logoHeight,
   buttonText,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHome, setIsHome] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 50);
+    };
+
+    const checkHash = () => {
+      setIsHome(window.location.hash === "#home");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("hashchange", checkHash);
+    checkHash(); // Initial check
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", checkHash);
+    };
+  }, []);
+
   return (
-    <nav>
-      {/* Desktop Navbar */}
+    <nav
+      className={clsx(
+        "fixed top-0 w-full bg-black text-white shadow-md transition-opacity duration-500 z-50",
+        {
+          "opacity-0 pointer-events-none": isHome,
+          "opacity-100": isVisible,
+          "opacity-0": !isVisible,
+        }
+      )}
+    >
       <div className="hidden lg:flex w-full h-full px-12 py-5 bg-black justify-center items-center gap-2.5 inline-flex">
         {/* Left Links */}
         <ul className="font-bold text-white px-2 justify-center items-center gap-[42px] flex tracking-wide">

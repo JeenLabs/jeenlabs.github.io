@@ -39,7 +39,12 @@
   }
    
   .home-hero-quote-text {
-    margin-bottom: 0.5rem;
+    color: rgb(255, 255, 255);
+    font-size: clamp(1rem, 0.8338rem + 0.5552vw, 1.5rem);
+    font-family: "Jost";
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
   }
    
   .home-container2 {
@@ -51,10 +56,12 @@
     border-color: #b3cbff;
     border-style: solid;
     border-width: 2px;
-    border-top-width: 0px;
+    border-top-width: 2px;
     border-left-width: 0px;
     border-right-width: 0px;
+    border-bottom-width: 0px;
   }
+   
   .home-hero-content-container {
     width: 100%;
     height: auto;
@@ -177,17 +184,7 @@
     width: 64px;
     height: 64px;
   }
-
-  .heroheaderqoute {
-    fill: var(--dl-color-theme-secondary1);
-    color: #ffffff;
-    font-size: clamp(1rem, 0.8338rem + 0.5552vw, 1.5rem);
-    font-family: "Jost";
-    margin-bottom: 0.5rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-
+   
   @media(max-width: 1200px) {
     .home-hero-section {
       justify-content: center;
@@ -219,6 +216,9 @@
   }
    
   @media(max-width: 767px) {
+    .home-hero-quote-text {
+      letter-spacing: 1.5px;
+    }
     .home-hero-content-text {
       font-size: 32px;
     }
@@ -228,8 +228,5 @@
     .home-icon5 {
       margin-top: 2rem;
     }
-    .heroheaderqoute {
-        letter-spacing: 1.7px;
-      }
   }
   

@@ -29,18 +29,17 @@ const Navbar: React.FC<NavbarProps> = ({
   logoHeight,
   buttonText,
 }) => {
-  const [isVisible, setIsVisible] = useState(true); // Default visible
+  const [isVisible, setIsVisible] = useState(false); // Start as false, navbar hidden initially
   const [prevScrollY, setPrevScrollY] = useState(0); // Track previous scroll position
-  const [isHome, setIsHome] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // If we are at the top of the page (scroll position 0), hide the navbar
+      // When scroll is at the top (hero section), do not show the navbar
       if (currentScrollY === 0) {
-        setIsVisible(false);
+        setIsVisible(false); // Hide navbar if on hero section
       } else if (currentScrollY > prevScrollY) {
         setIsVisible(false); // Scrolling down, hide navbar
       } else {
@@ -51,17 +50,16 @@ const Navbar: React.FC<NavbarProps> = ({
       setPrevScrollY(currentScrollY);
     };
 
-    const checkHash = () => {
-      setIsHome(window.location.hash === "#home");
+    // Wait for the page to fully load, then allow the navbar to be visible
+    const onLoadHandler = () => {
+      setIsVisible(true); // Enable visibility after page load
     };
 
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("hashchange", checkHash);
-    checkHash(); // Initial check
-
+    window.addEventListener("load", onLoadHandler); // Ensure navbar isn't visible on page load
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("hashchange", checkHash);
+      window.removeEventListener("load", onLoadHandler);
     };
   }, [prevScrollY]);
 

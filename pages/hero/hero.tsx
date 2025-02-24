@@ -1,92 +1,143 @@
+"use client";
 import React from "react";
-
-import "./hero.css";
+import { FlickeringGrid } from "@/components/ui/FlickeringGrid";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   scrollToSection: (id: string) => void;
 }
 
+function FloatingPaths({ position }: { position: number }) {
+  const paths = Array.from({ length: 36 }, (_, i) => ({
+    id: i,
+    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+      380 - i * 5 * position
+    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+      152 - i * 5 * position
+    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+      684 - i * 5 * position
+    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    color: `rgba(15,23,42,${0.1 + i * 0.03})`,
+    width: 0.5 + i * 0.03,
+  }));
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <svg
+        className="w-full h-full text-slate-950 dark:text-white"
+        viewBox="0 0 696 316"
+        fill="none"
+      >
+        {paths.map((path) => (
+          <motion.path
+            key={path.id}
+            d={path.d}
+            stroke="currentColor"
+            strokeWidth={path.width}
+            strokeOpacity={0.1 + path.id * 0.03}
+            initial={{ pathLength: 0.3, opacity: 0.6 }}
+            animate={{
+              pathLength: 1,
+              opacity: [0.3, 0.6, 0.3],
+              pathOffset: [0, 1, 0],
+            }}
+            transition={{
+              duration: 20 + Math.random() * 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
   return (
-    <div className="home-container1">
-      <div id="Home" className="home-hero-section">
-        <div className="home-hero-container">
-          <div className="home-hero-quote-container">
-            <span className="home-hero-quote-text heroheaderqoute">
-              AutomationS &amp; Web design Experts
-            </span>
-            <div className="home-container2"></div>
-          </div>
-          <div className="home-hero-content-container">
-            <span className="home-hero-content-text">
-              <span className="home-text10">Unlocking</span>
-              <span className="home-text11">
-                <span dangerouslySetInnerHTML={{ __html: " " }} />
-              </span>
-              <span className="home-text12">
-                the possibilities of
-                <span dangerouslySetInnerHTML={{ __html: " " }} />
-              </span>
-              <span className="home-text13">tomorrow</span>
-              <span className="home-text14">, </span>
-              <br className="home-text15"></br>
-              <span className="home-text16">JEENL</span>
-              <span className="home-text17">A</span>
-              <span className="home-text18">BS</span>
-              <span className="home-text19">
-                 is a glimpse into the digital future.
-              </span>
-            </span>
-            <img
-              alt="image"
-              src="/jeenlabs-logo.svg"
-              className="home-hero-content-image"
-            />
-          </div>
-          <div className="home-container3">
-            <div className="home-container4">
-              {/* Smooth Scroll Button */}
-              <button
-                type="button"
-                className="home-button"
-                onClick={() => scrollToSection("explore")}
-              >
-                <svg
-                  height="24"
-                  width="24"
-                  viewBox="0 0 24 24"
-                  className="home-icon1"
-                >
-                  <g
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  >
-                    <path d="M21 7.353v9.294a.6.6 0 0 1-.309.525l-8.4 4.666a.6.6 0 0 1-.582 0l-8.4-4.666A.6.6 0 0 1 3 16.647V7.353a.6.6 0 0 1 .309-.524l8.4-4.667a.6.6 0 0 1 .582 0l8.4 4.667a.6.6 0 0 1 .309.524"></path>
-                    <path d="m3.528 7.294l8.18 4.544a.6.6 0 0 0 .583 0l8.209-4.56M12 21v-9"></path>
-                  </g>
-                </svg>
-                <span>Explore Our Services</span>
-              </button>
-            </div>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="home-icon5"
-            >
-              <path
-                d="M11.998 20.92q-.16 0-.296-.057t-.267-.186l-5.427-5.421q-.14-.14-.15-.344t.13-.35q.146-.166.357-.156q.21.01.357.156l4.798 4.784V12.73q0-.213.144-.356t.357-.144t.356.144t.143.356v6.637l4.823-4.804q.136-.14.339-.14t.353.145q.137.134.137.341t-.14.348l-5.446 5.421q-.132.13-.27.187t-.298.055m.001-10.69q-.213 0-.356-.144T11.5 9.73v-2q0-.213.144-.357t.357-.143t.356.143t.143.357v2.019q0 .205-.144.343t-.357.138m0-5q-.213 0-.356-.144T11.5 4.73v-1q0-.213.144-.356t.357-.144t.356.144t.143.356v1.019q0 .205-.144.343t-.357.138"
-                fill="currentColor"
-              ></path>
-            </svg>
-          </div>
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
+      <FlickeringGrid
+        className="[mask-image:radial-gradient(750px_circle_at_center,white,transparent)]"
+        squareSize={4}
+        gridGap={6}
+        maxOpacity={0.5}
+        flickerChance={0.1}
+      />
+      {/* Main Content */}
+      <div className="relative z-10 flex items-center justify-center h-full p-8 flex-col text-white">
+        {/* Hero Quote Section */}
+        <div className="mb-4 text-center animate__animated animate__fadeIn">
+          <motion.h2
+            className="text-lg font-semibold tracking-widest uppercase border-b-2 border-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            Automation & Web Design Experts
+          </motion.h2>
         </div>
+
+        {/* Hero Logo */}
+        <div className="mt-8">
+          <motion.img
+            src="/jeenlabs-logo.svg"
+            alt="JeenLabs Logo"
+            className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/3 xl:w-1/2 mx-auto object-contain transition-all transform hover:scale-105"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 1.6 }}
+          />
+        </div>
+
+        {/* Hero Content Text */}
+        <div className="text-center space-y-4 animate__animated animate__fadeIn animate__delay-1s">
+          <motion.h1
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1 }}
+          >
+            <span className="text-red-600">Unlocking</span> the possibilities of
+          </motion.h1>
+          <motion.h1
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
+          >
+            tomorrow
+          </motion.h1>
+          <motion.h1
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mt-4"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.4 }}
+          >
+            <span className="tracking-[15px]">
+              <span className="text-white">JEENL</span>
+              <span className="text-red-600">A</span>
+              <span className="text-white">BS</span>
+            </span>
+            is a glimpse into the digital future.
+          </motion.h1>
+        </div>
+
+        {/* Explore Button */}
+        <div className="mt-8 md:mt-12 lg:mt-16 xl:mt-20">
+          <motion.button
+            onClick={() => scrollToSection("explore")}
+            className="bg-white text-black py-3 px-8 rounded-full border-2 border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 transform hover:scale-105"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 1.8 }}
+          >
+            Explore Our Services
+          </motion.button>
+        </div>
+      </div>
+      <div className="absolute inset-0">
+        <FloatingPaths position={-1} />
       </div>
     </div>
   );
 };
-
 export default Hero;

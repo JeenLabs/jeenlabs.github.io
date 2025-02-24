@@ -2,7 +2,11 @@ import React from "react";
 
 import "./hero.css";
 
-const Hero = () => {
+interface HeroProps {
+  scrollToSection: (id: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
   return (
     <div className="home-container1">
       <div id="Home" className="home-hero-section">
@@ -17,19 +21,11 @@ const Hero = () => {
             <span className="home-hero-content-text">
               <span className="home-text10">Unlocking</span>
               <span className="home-text11">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: " ",
-                  }}
-                />
+                <span dangerouslySetInnerHTML={{ __html: " " }} />
               </span>
               <span className="home-text12">
                 the possibilities of
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: " ",
-                  }}
-                />
+                <span dangerouslySetInnerHTML={{ __html: " " }} />
               </span>
               <span className="home-text13">tomorrow</span>
               <span className="home-text14">, </span>
@@ -49,7 +45,12 @@ const Hero = () => {
           </div>
           <div className="home-container3">
             <div className="home-container4">
-              <button type="button" className="home-button">
+              {/* Smooth Scroll Button */}
+              <button
+                type="button"
+                className="home-button"
+                onClick={() => scrollToSection("explore")}
+              >
                 <svg
                   height="24"
                   width="24"

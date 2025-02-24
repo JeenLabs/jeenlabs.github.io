@@ -1,0 +1,199 @@
+.explore-container1 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #000000;
+  }
+   
+  .explore-hero-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 8%;
+    overflow: hidden;
+    max-width: 1920px;
+    align-items: center;
+    flex-direction: column;
+  }
+   
+  .explore-hero-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+   
+  .explore-hero-quote-container {
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    position: relative;
+    align-self: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+   
+  .explore-hero-quote-text {
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-family: "Jost";
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+  }
+   
+  .explore-container2 {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    border-color: #b3cbff;
+    border-style: solid;
+    border-width: 2px;
+    border-top-width: 2px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+  }
+   
+  .explore-hero-content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+   
+  .explore-hero-content-text {
+    fill: var(--dl-color-theme-primary2);
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    align-self: center;
+    margin-top: 5rem;
+    text-align: center;
+    font-family: "Jost";
+    margin-bottom: 5rem;
+  }
+   
+  .explore-text1 {
+    color: #ff0000;
+  }
+   
+  .explore-text5 {
+    letter-spacing: 15px;
+  }
+   
+  .explore-text6 {
+    color: #ff0000;
+    letter-spacing: 15px;
+  }
+   
+  .explore-text7 {
+    letter-spacing: 15px;
+  }
+   
+  .explore-container3 {
+    flex: 0 0 auto;
+    width: 100%;
+    border: 2px dashed rgba(120, 120, 120, 0.4);
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+   
+  .explore-container4 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+   
+  .explore-container5 {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+  }
+   
+  .explore-button {
+    gap: 0.5rem;
+    fill: var(--dl-color-theme-neutral-dark);
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-self: center;
+    transition: 0.3s;
+    align-items: center;
+    font-family: "Jost";
+    padding-top: 1rem;
+    border-color: #ff0000;
+    border-width: 1px;
+    padding-left: 2rem;
+    border-radius: 50px;
+    padding-right: 2rem;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    justify-content: center;
+  }
+   
+  .explore-button:hover {
+    box-shadow: 0px 3px 15px 0px #d4d4d4;
+    border-color: #ffffff;
+  }
+   
+  .explore-button:active {
+    box-shadow: 0px 3px 15px 0px #ff0000;
+  }
+   
+  .explore-icon1 {
+    color: #f70000;
+  }
+   
+  .explore-icon5 {
+    fill: var(--dl-color-theme-neutral-dark);
+    color: #ff0000;
+    width: 64px;
+    height: 64px;
+  }
+   
+  @media(max-width: 1200px) {
+    .explore-hero-section {
+      height: 100%;
+      justify-content: center;
+    }
+  }
+   
+  @media(max-width: 991px) {
+    .explore-hero-quote-container {
+      align-self: center;
+      margin-bottom: var(--dl-space-space-twounits);
+    }
+    .explore-hero-content-container {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      flex-direction: column-reverse;
+    }
+    .explore-hero-content-text {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+   
+  @media(max-width: 767px) {
+    .explore-hero-quote-text {
+      letter-spacing: 1.5px;
+    }
+    .explore-hero-content-text {
+      font-size: 32px;
+    }
+    .explore-container4 {
+      flex-direction: column;
+    }
+    .explore-icon5 {
+      margin-top: 2rem;
+    }
+  }
+  

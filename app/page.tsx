@@ -1,8 +1,14 @@
+"use client";
+
 import React from "react";
 import Navbar from "@/components/navbar/navbar";
 import Hero from "@/pages/hero/hero";
+import Explore from "@/pages/explore/explore";
+import useSmoothScroll from "@/hooks/useSmoothScroll";
 
 const Index = () => {
+  const { registerSection, scrollToSection } = useSmoothScroll();
+
   const leftNavLinks = [
     { name: "FEATURES", path: "/features" },
     { name: "WHY US?", path: "/whyus" },
@@ -24,7 +30,12 @@ const Index = () => {
         logoHeight={0}
         buttonText="Coming Soon"
       />
-      <Hero />
+      <div ref={registerSection("hero")}>
+        <Hero scrollToSection={scrollToSection} />
+      </div>
+      <div ref={registerSection("explore")}>
+        <Explore />
+      </div>
     </div>
   );
 };

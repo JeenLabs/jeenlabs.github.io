@@ -29,13 +29,26 @@ const Navbar: React.FC<NavbarProps> = ({
   logoHeight,
   buttonText,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Default visible
+  const [prevScrollY, setPrevScrollY] = useState(0); // Track previous scroll position
   const [isHome, setIsHome] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      // If we are at the top of the page (scroll position 0), hide the navbar
+      if (currentScrollY === 0) {
+        setIsVisible(false);
+      } else if (currentScrollY > prevScrollY) {
+        setIsVisible(false); // Scrolling down, hide navbar
+      } else {
+        setIsVisible(true); // Scrolling up, show navbar
+      }
+
+      // Update the previous scroll position
+      setPrevScrollY(currentScrollY);
     };
 
     const checkHash = () => {
@@ -50,16 +63,15 @@ const Navbar: React.FC<NavbarProps> = ({
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", checkHash);
     };
-  }, []);
+  }, [prevScrollY]);
 
   return (
     <nav
       className={clsx(
         "fixed top-0 w-full bg-black text-white shadow-md transition-opacity duration-500 z-50",
         {
-          "opacity-0 pointer-events-none": isHome,
-          "opacity-100": isVisible,
-          "opacity-0": !isVisible,
+          "opacity-0 pointer-events-none": !isVisible, // If not visible, hide the navbar
+          "opacity-100": isVisible, // If visible, show the navbar
         }
       )}
     >

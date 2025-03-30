@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
@@ -29,50 +27,10 @@ const Navbar: React.FC<NavbarProps> = ({
   logoHeight,
   buttonText,
 }) => {
-  const [isVisible, setIsVisible] = useState(false); // Start as false, navbar hidden initially
-  const [prevScrollY, setPrevScrollY] = useState(0); // Track previous scroll position
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // When scroll is at the top (hero section), do not show the navbar
-      if (currentScrollY === 0) {
-        setIsVisible(false); // Hide navbar if on hero section
-      } else if (currentScrollY > prevScrollY) {
-        setIsVisible(false); // Scrolling down, hide navbar
-      } else {
-        setIsVisible(true); // Scrolling up, show navbar
-      }
-
-      // Update the previous scroll position
-      setPrevScrollY(currentScrollY);
-    };
-
-    // Wait for the page to fully load, then allow the navbar to be visible
-    const onLoadHandler = () => {
-      setIsVisible(true); // Enable visibility after page load
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", onLoadHandler); // Ensure navbar isn't visible on page load
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("load", onLoadHandler);
-    };
-  }, [prevScrollY]);
-
   return (
-    <nav
-      className={clsx(
-        "fixed top-0 w-full bg-black text-white shadow-md transition-opacity duration-500 z-50",
-        {
-          "opacity-0 pointer-events-none": !isVisible, // If not visible, hide the navbar
-          "opacity-100": isVisible, // If visible, show the navbar
-        }
-      )}
-    >
+    <nav className="w-full bg-black text-white shadow-md z-50">
       <div className="hidden lg:flex w-full h-full px-12 py-5 bg-black justify-center items-center gap-2.5 inline-flex">
         {/* Left Links */}
         <ul className="font-bold text-white px-2 justify-center items-center gap-[42px] flex tracking-wide">
@@ -126,10 +84,10 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Navbar */}
-      <div className="lg:hidden flex flex-col w-full h-full px-12 py-5 bg-black justify-center items-center gap-2.5">
+      <div className="lg:hidden flex flex-col w-full h-full px-12 py-5 bg-black justify-center items-center">
         {/* Logo in Mobile */}
         <Link href="/">
-          <div className="cursor-pointer mx-14 flex-col justify-center items-center inline-flex font-bold">
+          <div className="cursor-pointer mx-14 flex-row justify-center items-center inline-flex font-bold gap-2">
             <Image
               className="w-12"
               src={logoSrc}
@@ -138,7 +96,7 @@ const Navbar: React.FC<NavbarProps> = ({
               height={logoHeight}
               priority
             />
-            <div className="text-2xl tracking-[0.4em]">
+            <div className="text-2xl tracking-[0.4em] ml-2">
               <span className="text-white">JEENL</span>
               <span className="text-red-600">A</span>
               <span className="text-white">BS</span>
